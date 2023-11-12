@@ -1,28 +1,37 @@
-<html>
+{% extends "base.html" %}
+{% block title %}
+profile
+{% endblock %}
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>index</title>
-</head>
-
-<body style="font-family: 'Architects Daughter', serif;background: rgb(220,238,255);">
-    <nav class="navbar navbar-dark navbar-expand-md sticky-top bg-dark py-3">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center mr-2 bs-icon"><i class="la la-question"></i></span><span>BubliQustion</span></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-5"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div id="navcol-5" class="collapse navbar-collapse"><input type="search" /><a class="btn btn-primary ml-lg-2" role="button" href="#">Ask!</a>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"></li>
-                    <li class="nav-item"><img width="100" height="80" style="height: 100px;" /></li>
-                    <li class="nav-item"><span style="color: var(--white);margin-left: 5px;">Doctor Bub</span><a class="nav-link" href="#">settings</a><a class="nav-link" href="#">log out</a></li>
-                </ul>
-            </div>
+{% block navbar %}
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center mr-2 bs-icon">
+                <i class="la la-question"></i>
+            </span><span>BubliQustion</span>
+        </a>
+    <div id="navcol-5" class="collapse navbar-collapse" style="margin-right: -103px;padding-right: 108px;">
+        <input type="search" />
+        <a class="btn btn-primary ml-lg-2" role="button" href="#">Ask!</a>
+    </div><img width="100" height="80" style="height: 100px;" />
+    <div>
+        <div class="row">
+            <div class="col"><span style="color: azure;margin-left: 5px;">Doctor Bub</span></div>
         </div>
-    </nav>
-    <div class="container" style="color: rgb(0,0,0);font-family: 'Architects Daughter', serif;">
-        <div class="row" style="margin-top: 20px;">
-            <div class="col-md-8">
+        <div class="row">
+            <div class="col"><a href="#" style="margin: 5px;">log out</a></div>
+        </div>
+        <div class="row">
+            <div class="col"><a href="#" style="margin: 5px;">settings</a></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-8">
                 <ol class="breadcrumb" style="background: rgb(0,56,112);">
-                    <li class="breadcrumb-item"><a href="#"><span>New BubQuestions</span></a></li>
+                    <li class="breadcrumb-item" style="margin-left: 10px ;"><a href="#"><span>New BubQuestions</span></a></li>
                     <li class="breadcrumb-item"><a href="#"><span>Hot BubQuestions</span></a></li>
                 </ol>
                 <div class="border rounded-0 border-dark shadow" style="margin-bottom: 20px;margin-top: 20px;">
@@ -65,7 +74,7 @@
                                     <div class="col-lg-2"><a href="#">Link</a><span>(3)</span></div>
                                     <div class="col"><span>Tags:</span>
                                         <ul class="list-inline" style="transform: translate(0px);">
-                                            <li class="list-inline-item"><a href="#">Link</a></li>
+                                            <li class="list-inline-item"><a href="#">Lin341213k</a></li>
                                             <li class="list-inline-item"><a href="#">Link</a></li>
                                             <li class="list-inline-item"><a href="#">Link</a></li>
                                         </ul>
@@ -87,33 +96,4 @@
                     </ul>
                 </nav>
             </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col">
-                        <h1>Popular tags</h1>
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><span>Text</span></li>
-                            <li class="list-inline-item"><span>Text</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <h1>Best members</h1>
-                        <ul class="list-unstyled">
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer class="d-flex" style="background: #003870;margin-top: auto;">
-        <p style="color: rgb(91,124,157);border-color: #9bc2eb;">BubliQuestion</p>
-    </footer>
-</body>
-
-</html>
+{% endblock %}

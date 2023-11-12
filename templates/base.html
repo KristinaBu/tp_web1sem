@@ -11,18 +11,45 @@
 
    <title>{% block title %}{% endblock %}</title>
 </head>
-<body style="font-family: 'Architects Daughter', serif;background: rgb(220,238,255);">
+     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <body style="font-family: 'Architects Daughter', serif;background: rgb(220,238,255);">
    <nav class="navbar navbar-dark navbar-expand-md bg-dark py-3">
-   {% block content %}
+   {% block navbar %}
    <!-- Навигационное меню -->
    {% endblock %}
    </nav>
 
    <div class="container" style="color: rgb(0,0,0);">
-       {% block content %} {% endblock %}
+       <div class="row" style="margin-top: 20px;">
+            {% block content %} {% endblock %}
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col">
+                        <h1>Popular tags</h1>
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><span>Text</span></li>
+                            <li class="list-inline-item"><span>Text</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h1>Best members</h1>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
    </div>
    <footer class="d-flex" style="background: #003870;margin-top: auto;">
        <p style="color: rgb(91,124,157);border-color: #9bc2eb;">BubliQuestion</p>
    </footer>
 </body>
 </html>
+

@@ -2,7 +2,7 @@
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
-main > .container {
+/*main > .container {
   padding: 60px 15px 0;
 }
 
@@ -11,4 +11,14 @@ main > .container {
   margin-top: 30px;
   border-radius: 10px;
   padding: 20px;
+}*/
+
+/*body {
+  font-family: 'Architects Daughter', serif;
+  background: rgb(220,238,255);
+}*/
+
+body {
+    background-color: #f0f0f0;
+    font-family: 'Architects Daughter', serif;
 }
