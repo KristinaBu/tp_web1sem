@@ -1,0 +1,96 @@
+{% extends "app_tp/base_notreg.html" %}
+
+{% block content %}
+<div class="col-md-8">
+                <div class="border-dark" style="margin-top: 20px;height: 250px;padding-bottom: 2px;margin-bottom: 20px;border-bottom-style: solid;">
+                    <div class="row">
+                        <div class="col-lg-3" style="height: 250px;">
+                            {% load static %}
+                            <img class="avatar" src="{% static 'app_tp/img/q_ava.png' %}"/>
+                            <p style="margin: 0px 0px 15px;width: 41px;margin-left: 45px;">5</p>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button class="btn btn-primary" type="button" style="background: rgb(113,215,238);">Bub+</button>
+                                <button class="btn btn-primary" type="button" style="background: #047e99;">Bub-</button>
+                            </div>                        </div>
+                        <div class="col">
+                            <div style="height: 180px;">
+                                <h1 style="height: 50px;">How to find Bublik?</h1>
+                                <p style="height: 100px;">Help me</p>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col" style="height: 65px;"><span>Tags:</span>
+                                        <ul class="list-inline" style="transform: translate(0px);">
+                                            <li class="list-inline-item"><a href="#">Link</a></li>
+                                            <li class="list-inline-item"><a href="#">Link</a></li>
+                                            <li class="list-inline-item"><a href="#">Link</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border rounded-0 border-dark shadow" style="margin-bottom: 20px;margin-top: 20px;">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            {% load static %}
+                            <img class="avatar" src="{% static 'app_tp/img/q_ava.png' %}"/>
+                            <p style="margin: 0px 0px 15px 45px;">5</p>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button class="btn btn-primary" type="button" style="background: rgb(113,215,238);">Bub+</button>
+                                <button class="btn btn-primary" type="button" style="background: #047e99;">Bub-</button>
+                            </div>                        </div>
+                        <div class="col">
+                            <div>
+                                <h1>How to find Bublik?</h1>
+                                <p>Help me</p>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-check"><input id="formCheck-1" class="form-check-input" type="radio" /><label class="form-check-label" for="formCheck-1">Correct</label></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border rounded-0 border-dark shadow" style="margin-bottom: 20px;margin-top: 20px;">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            {% load static %}
+                            <img class="avatar" src="{% static 'app_tp/img/q_ava.png' %}"/>
+                            <p style="margin: 0px 0px 15px 45px;">6</p>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button class="btn btn-primary" type="button" style="background: rgb(113,215,238);">Bub+</button>
+                                <button class="btn btn-primary" type="button" style="background: #047e99;">Bub-</button>
+                            </div>                        </div>
+                        <div class="col">
+                            <div>
+                                <h1>How to find Bublik?</h1>
+                                <p>Help me</p>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-check"><input id="formCheck-2" class="form-check-input" type="radio" /><label class="form-check-label" for="formCheck-2">Correct</label></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border rounded-0 border-dark" style="margin: 10px 0px 10px 0px;margin-bottom: 10px;margin-top: 11px;border-width: 7.571429px;border-style: solid;background: #000000;"></div>
+                <div>
+                    <div class="row">
+                        <div class="col"><textarea style="width: 600px;" minlength="1" maxlength="300" title="Enter your answer here..." placeholder="Enter your answer here..."></textarea></div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><button class="btn btn-primary" type="button">Bub to answer!</button></div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+
+

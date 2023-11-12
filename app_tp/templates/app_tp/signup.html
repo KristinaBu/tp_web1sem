@@ -1,0 +1,40 @@
+{% extends "app_tp/base_notreg.html" %}
+
+
+{% block content %}
+<div class="col-md-8">
+                <h1>Registration</h1>
+                <div class="alert alert-warning" role="alert"><span><strong>Sorry, this email adress already registred</strong></span></div>
+                <div>
+                    <div class="row">
+                        <div class="col-lg-3"><span style="margin: 10px;">Login</span></div>
+                        <div class="col"><input type="text" style="margin: 10px 0px 10px;margin-bottom: 9px;width: 400px;" minlength="1" maxlength="50" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3"><span style="margin: 10px;">Email</span></div>
+                        <div class="col"><input type="email" style="margin: 10px 0px 10px;width: 400px;" minlength="1" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3"><span style="margin: 10px;">NickName</span></div>
+                        <div class="col"><input type="text" style="margin: 10px 0px 10px;margin-bottom: 9px;width: 400px;" minlength="1" maxlength="100" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3"><span style="margin: 10px;">Password</span></div>
+                        <div class="col"><input type="password" style="width: 400px;margin: 10px 0px 10px;" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3"><span style="margin-left: 10px;">Repeat password</span></div>
+                        <div class="col"><input type="password" style="width: 400px;margin: 10px 0px 10px;" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3"><span style="margin: 10px;">Upload avatar</span></div>
+                        <div class="col"><input type="file" data-toggle="tooltip" style="margin: 10px 0px 10px;width: 400px;" accept="image/*" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><button class="btn btn-primary" type="button" style="margin: 0px;margin-bottom: 1px;margin-left: 0px;">Register</button></div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+
+

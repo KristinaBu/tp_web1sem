@@ -1,0 +1,50 @@
+{% extends "app_tp/base_reg.html" %}
+
+
+{% block content %}
+<div class="col-md-8">
+                <h1 style="background: #003870;color: #9bc2eb;height: 56px;">Tag:tag1</h1>
+                <div class="border rounded-0 border-dark shadow" style="margin-bottom: 20px;margin-top: 20px;">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            {% load static %}
+                            <img class="avatar" src="{% static 'app_tp/img/q_ava.png' %}"/>
+                            <p style="margin: 0px 0px 15px;margin-left: 54px;margin-right: 34px;">5 </p>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button class="btn btn-primary" type="button" style="background: rgb(113,215,238);">Bub+</button>
+                                <button class="btn btn-primary" type="button" style="background: #047e99;">Bub-</button>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div><a href="#" style="font-size: 35px;">How to find bublic?</a>
+                                <p>Help me</p>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-lg-2"><a href="#">Link</a><span>(3)</span></div>
+                                    <div class="col"><span>Tags:</span>
+                                        <ul class="list-inline" style="transform: translate(0px);">
+                                            <li class="list-inline-item"><a href="#">Link</a></li>
+                                            <li class="list-inline-item"><a href="#">Link</a></li>
+                                            <li class="list-inline-item"><a href="#">Link</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+{% endblock %}
+

@@ -1,0 +1,16 @@
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+
+body {
+    background-color:  rgb(220,238,255);
+}
+
+.avatar{
+    max-width: 100px;
+    max-height: 80px;
+    margin: 10px;
+}
+
+
