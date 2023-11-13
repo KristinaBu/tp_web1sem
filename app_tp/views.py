@@ -52,7 +52,6 @@ def tag(request, tag_id):
 def answers(request):
     return render(request, 'app_tp/question.html', {'answers' : AMSWERS,
                    'tags' : TAGS})
-    #???
 
 def question(request, question_id):
     question_item = QUETIONS[question_id]
