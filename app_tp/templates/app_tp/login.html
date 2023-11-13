@@ -1,76 +1,20 @@
-{% extends "app_tp/base_notreg.html" %}
+{% extends "app_tp/layouts/base_notreg.html" %}
 
 
 {% block content %}
-<div class="col-md-8">
-                <h1>Log In</h1>
-                <div class="alert alert-warning" role="alert"><span><strong>Wrong password</strong></span></div>
-                <div>
-                    <div class="row">
-                        <div class="col-lg-3"><span style="margin: 10px;">Login</span></div>
-                        <div class="col"><input type="text" style="margin: 10px 0px 10px;margin-bottom: 9px;width: 400px;" minlength="1" maxlength="200" placeholder="Enter your login..." /></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3"><span style="margin: 10px;">Password</span></div>
-                        <div class="col"><input type="password" style="width: 400px;margin: 10px 0px 10px;" /></div>
-                    </div>
-                    <div class="row">
-                        <div class="col"><button class="btn btn-primary" type="button" style="margin: 0px;margin-bottom: 1px;margin-left: 0px;">Log in</button><a href="#" style="margin: 0px 0px 0px 20px;">Create new bubcount</a></div>
-                    </div>
-                </div>
-            </div>
-{% endblock %}
-
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>login</title>
-</head>
-
-<body style="font-family: 'Architects Daughter', serif;background: rgb(220,238,255);">
-    <nav class="navbar navbar-dark navbar-expand-md sticky-top bg-dark py-3">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center mr-2 bs-icon"><i class="la la-question"></i></span><span>BubliQustion</span></a>
-            <div id="navcol-5" class="collapse navbar-collapse"><input type="search" /><a class="btn btn-primary ml-lg-2" role="button" href="#">Ask!</a>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"><a class="nav-link" href="#">log in</a><a class="nav-link" href="#">register</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container" style="color: rgb(0,0,0);">
-        <div class="row" style="margin-top: 20px;">
-
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col">
-                        <h1>Popular tags</h1>
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><span>Text</span></li>
-                            <li class="list-inline-item"><span>Text</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <h1>Best members</h1>
-                        <ul class="list-unstyled">
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+<h1>Log In</h1>
+<div class="alert alert-warning" role="alert"><span><strong>Wrong password</strong></span></div>
+<div>
+    <div class="row">
+        <div class="col-lg-3"><span style="margin: 10px;">Login</span></div>
+        <div class="col"><input type="text" style="margin: 10px 0px 10px;margin-bottom: 9px;width: 400px;" minlength="1" maxlength="200" placeholder="Enter your login..." /></div>
     </div>
-    <footer class="d-flex" style="background: #003870;margin-top: auto;">
-        <p style="color: rgb(91,124,157);border-color: #9bc2eb;">BubliQuestion</p>
-    </footer>
-</body>
-
-</html>
+    <div class="row">
+        <div class="col-lg-3"><span style="margin: 10px;">Password</span></div>
+        <div class="col"><input type="password" style="width: 400px;margin: 10px 0px 10px;" /></div>
+    </div>
+    <div class="row">
+        <div class="col"><button class="btn btn-primary" type="button" style="margin: 0px;margin-bottom: 1px;margin-left: 0px;">Log in</button><a href="{% url 'signup' %}" style="margin: 0px 0px 0px 20px;">Create new bubcount</a></div>
+    </div>
+</div>
+{% endblock %}

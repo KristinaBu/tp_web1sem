@@ -1,82 +1,47 @@
-{% extends "app_tp/base_reg.html" %}
+{% extends "app_tp/layouts/base_reg.html" %}
 
+{% load static %}
 
 {% block content %}
-<div class="col-md-8">
-                <ol class="breadcrumb" style="background: rgb(0,56,112);">
-                    <li class="breadcrumb-item" style="margin-left: 10px ;"><a href="#"><span>New BubQuestions</span></a></li>
-                    <li class="breadcrumb-item"><a href="#"><span>Hot BubQuestions</span></a></li>
-                </ol>
-                <div class="border rounded-0 border-dark shadow" style="margin-bottom: 20px;margin-top: 20px;">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            {% load static %}
-                            <img class="avatar" src="{% static 'app_tp/img/q_ava.png' %}"/>
-                            <p style="margin: 0px 0px 15px;margin-left: 54px;margin-right: 34px;">5</p>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <button class="btn btn-primary" type="button" style="background: rgb(113,215,238);">Bub+</button>
-                                <button class="btn btn-primary" type="button" style="background: #047e99;">Bub-</button>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div><a href="#" style="font-size: 35px;">How to find bublic?</a>
-                                <p>Help me</p>
-                            </div>
-                            <div>
-                                <div class="row">
-                                    <div class="col-lg-2"><a href="#">Link</a><span>(3)</span></div>
-                                    <div class="col"><span>Tags:</span>
-                                        <ul class="list-inline" style="transform: translate(0px);">
-                                            <li class="list-inline-item"><a href="#">Link</a></li>
-                                            <li class="list-inline-item"><a href="#">Link</a></li>
-                                            <li class="list-inline-item"><a href="#">Link</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="border rounded-0 border-dark shadow" style="margin-bottom: 20px;margin-top: 20px;">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            {% load static %}
-                            <img class="avatar" src="{% static 'app_tp/img/q_ava.png' %}"/>
-                            <p style="margin: 0px 0px 15px;margin-left: 54px;margin-right: 34px;">5</p>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <button class="btn btn-primary" type="button" style="background: rgb(113,215,238);">Bub+</button>
-                                <button class="btn btn-primary" type="button" style="background: #047e99;">Bub-</button>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div><a href="#" style="font-size: 35px;">How to find bublic?</a>
-                                <p>Help me</p>
-                            </div>
-                            <div>
-                                <div class="row">
-                                    <div class="col-lg-2"><a href="#">Link</a><span>(3)</span></div>
-                                    <div class="col"><span>Tags:</span>
-                                        <ul class="list-inline" style="transform: translate(0px);">
-                                            <li class="list-inline-item"><a href="#">Lin341213k</a></li>
-                                            <li class="list-inline-item"><a href="#">Link</a></li>
-                                            <li class="list-inline-item"><a href="#">Link</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <nav>
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
-                    </ul>
-                </nav>
+
+<ol class="breadcrumb" style="background: rgb(0,56,112);">
+    <li class="breadcrumb-item" style="margin-left: 10px ;"><a href="{% url 'index' %}"><span>{{p1}}New BubQuestions</span></a></li>
+    <li class="breadcrumb-item"><a href="{% url 'hot' %}"><span>Hot BubQuestions</span></a></li>
+</ol>
+
+{% for question in questions %}
+
+<div class="border rounded-0 border-dark shadow" style="margin-bottom: 20px;margin-top: 20px;">
+    <div class="row">
+        <div class="col-lg-3">
+            <img class="avatar" src="{% static 'app_tp/img/q_ava.png' %}"/>
+            <p style="margin: 0px 0px 15px;margin-left: 54px;margin-right: 34px;">5</p>
+            {% include 'app_tp/components/buttons_like.html' %}
+        </div>
+        <div class="col">
+            <div><a href="{% url 'question' question_id=question.id %}" style="font-size: 35px;"> {{ question.title }} </a>
+                <p>{{ question.text }}</p>
             </div>
+            <div>
+                <div class="row">
+                    <div class="col-lg-2"><a href="#">Link</a><span>(3)</span></div>
+                    <div class="col"><span>Tags:</span>
+                        <ul class="list-inline" style="transform: translate(0px);">
+                            {% for tag in tags %}
+                            <li class="list-inline-item">
+                                <a href="{% url 'tag' tag_id=tag.id  %}">{{tag.tag_name}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% include 'app_tp/components/pagination_questions.html' %}
+
 {% endblock %}

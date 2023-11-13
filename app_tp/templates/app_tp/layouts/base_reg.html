@@ -1,0 +1,22 @@
+{% extends "app_tp/layouts/base.html" %}
+<!-- navbar Юзер в своем лк -->
+{% load static %}
+
+{% block navbar %}
+
+        <img src="{% static 'app_tp/img/ava.png' %}"  width="100" height="80" style="height: 100px;" />
+    <div>
+        <div class="row">
+            <div class="col"><span style="color: azure;margin-left: 5px;">Doctor Bub</span></div>
+        </div>
+        <div class="row">
+            <div class="col"><a href="#" style="margin: 5px;">log out</a></div>
+        </div>
+        <div class="row">
+            <div class="col"><a href="#" style="margin: 5px;">settings</a></div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+
+{% endblock %}>
