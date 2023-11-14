@@ -1,36 +1,32 @@
-{% extends "app_tp/layouts/base_reg.html" %}
+{% extends "layouts/base_reg.html" %}
 
 {% load static %}
 
 {% block content %}
 
-
-<h1 style="background: #003870;color: #9bc2eb;height: 56px;">
-    Tag: {{ tag.tag_name }}
-</h1>
-
-
-
+<ol class="breadcrumb" style="background: rgb(0,56,112);">
+    <li class="breadcrumb-item" style="margin-left: 10px ;"><a href="{% url 'index' %}"><span>{{p1}}New BubQuestions</span></a></li>
+    <li class="breadcrumb-item"><a href="{% url 'hot' %}"><span>Hot BubQuestions</span></a></li>
+</ol>
 
 {% for question in questions %}
 
-<div class="border routn-group btn-group-smnded-0 border-dark shadow" style="margin-bottom: 20px;margin-top: 20px;">
+<div class="border rounded-0 border-dark shadow" style="margin-bottom: 20px;margin-top: 20px;">
     <div class="row">
         <div class="col-lg-3">
             <img class="avatar" src="{% static 'app_tp/img/q_ava.png' %}"/>
-            <p style="margin: 0px 0px 15px;margin-left: 54px;margin-right: 34px;">5 </p>
-            {% include 'app_tp/components/buttons_like.html' %}
+            <p style="margin: 0px 0px 15px;margin-left: 54px;margin-right: 34px;">5</p>
+            {% include 'components/buttons_like.html' %}
         </div>
         <div class="col">
             <div><a href="{% url 'question' question_id=question.id %}" style="font-size: 35px;"> {{ question.title }} </a>
-                <p>Help me</p>
+                <p>{{ question.text }}</p>
             </div>
             <div>
                 <div class="row">
                     <div class="col-lg-2"><a href="#">Link</a><span>(3)</span></div>
                     <div class="col"><span>Tags:</span>
-                       <ul class="list-inline" style="transform: translate(0px);">
-                           <li class="list-inline-item">{{tag.tag_name}} </li>
+                        <ul class="list-inline" style="transform: translate(0px);">
                             {% for tag in tags %}
                             <li class="list-inline-item">
                                 <a href="{% url 'tag' tag_id=tag.id  %}">{{tag.tag_name}}</a>
@@ -46,7 +42,6 @@
 
 {% endfor %}
 
-{% include 'app_tp/components/pagination_questions.html' %}
+{% include 'components/pagination_questions.html' %}
 
 {% endblock %}
-
