@@ -7,11 +7,11 @@
 <div class="border-dark" style="margin-top: 20px;height: 250px;padding-bottom: 2px;margin-bottom: 20px;border-bottom-style: solid;">
     <div class="row">
         <div class="col-lg-3" style="height: 250px;">
-            <img class="avatar" src="{% static 'app_tp/img/q_ava.png' %}"/>
+            <img   src="{% static 'app_tp/img/ava.png' %}"   style="max-width: 100px;max-height: 80px;margin: 10px;"/>
             <p style="margin: 0px 0px 15px;width: 41px;margin-left: 45px;">5</p>
             {% include 'components/buttons_like.html' %}
         </div>
-        <div class="col">
+        <div class="col" style="word-wrap: break-word;">
             <div style="height: 180px;">
                 <h1 style="height: 50px;">{{question.title}} - How to find Bublik?</h1>
                 <p style="height: 100px;">{{ question.text }}</p>
@@ -19,9 +19,9 @@
             <div>
                 <div class="row">
                     <div class="col" style="height: 65px;"><span>Tags:</span>
-                            {% for tag in tags %}
+                            {% for tag in question.tags.all %}
                             <li class="list-inline-item">
-                                <a href="{% url 'tag' tag_id=tag.id  %}">{{tag.tag_name}}</a>
+                                <a href="{% url 'tag' tag_id=tag.id  %}">{{tag.name}}</a>
                             </li>
                             {% endfor %}
                     </div>
@@ -37,11 +37,12 @@
 <div class="border rounded-0 border-dark shadow" style="margin-bottom: 20px;margin-top: 20px;">
     <div class="row">
         <div class="col-lg-3">
-            <img class="avatar" src="{% static 'app_tp/img/q_ava.png' %}"/>
+            <img   src="{% static 'app_tp/img/ava.png' %}"   style="max-width: 100px;max-height: 80px;margin: 10px;"/>
             <p style="margin: 0px 0px 15px 45px;">5</p>
             {% include 'components/buttons_like.html' %}
         </div>
-        <div class="col">
+        <div class="col" style="word-wrap: break-word;">
+
             <div>
                 <p style="margin-top: 5px"> {{answer.text}}</p>
             </div>

@@ -1,22 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import Paginator
+from .models import Tag, Question, Profile, Answer
 import math
 
 
-# Create your views here.
-QUETIONS = [{'id': i,
-              'title': f'title {i}',
-              'text': f'text {i}'} for i in range(0, 20)]
-HOT_QUETIONS = [{'id': i,
-              'title': f'hot title {i}',
-              'text': f'text {i}'} for i in range(0, 20)]
-
-TAGS = [{'id': i,
-         'tag_name': f'bububu {i}'} for i in range(0, 3)]
-
-AMSWERS = [{'id': i,
-            'text': f'clever answer {i}'} for i in range(0, 10)]
 
 def paginate(objects, request, per_page=10):
     page_number_str = request.GET.get('page', '1')
@@ -32,45 +20,51 @@ def paginate(objects, request, per_page=10):
 
 
 def index(request):
-
+    questions = Question.objects.get_questions_ordered_by_date()
+    popular_tags = Tag.objects.all()
     return render(request,'index.html',
-                  {'questions' : paginate(QUETIONS, request, 5),
-                   'tags' : TAGS})
+                  {'questions' : paginate(questions, request, 5),
+                   'popular_tags' : popular_tags})
 
 def hot(request):
-    '''один вопрос под своим id'''
-    return render(request,'index.html', {'questions' : paginate(HOT_QUETIONS, request, 5),
-                                                'tags' : TAGS})
+    hot_questions = Question.objects.get_questions_ordered_by_rating()
+    popular_tags = Tag.objects.all()
+    return render(request,'index.html',
+                  {'questions' : paginate(hot_questions, request, 5),
+                                                'popular_tags' : popular_tags})
 
 def tag(request, tag_id):
-    tag_item = TAGS[tag_id]
-    question_item = QUETIONS[1]
-    return render(request,'tag.html', {'tag' : tag_item, 'questions' : paginate(QUETIONS, request, 5),
-                                              'question' : question_item,  'tags' : TAGS})
+    popular_tags = Tag.objects.all()
+    tag_item = Tag.objects.get(id=tag_id)
+    return render(request,'tag.html', {'tag' : tag_item,
+                                       'questions' : paginate(Question.objects.get_questions_by_tag(tag_item.id), request, 5),
+                                       'popular_tags' : popular_tags})
 
 
-def answers(request):
-    return render(request, 'question.html', {'answers' : AMSWERS,
-                   'tags' : TAGS})
 
 def question(request, question_id):
-    question_item = QUETIONS[question_id]
-    return render(request,'question.html', {'question' : question_item,
-                                                   'tags' : TAGS,
-                                                   'answers' : paginate(AMSWERS, request, 5)})
+    #questions = Question.objects.get_questions_ordered_by_date()
+    #question_item = questions[question_id]
+    popular_tags = Tag.objects.all()
+    question_item = Question.objects.get(id=question_id)
+    return render(request,'question.html', {'question' : question_item, 'popular_tags' : popular_tags,
+                                            'answers' : paginate(Answer.objects.get_answers_by_question(question_item.id), request, 5)})
 
 
 
 def ask(request):
-    return render(request,'ask.html', {'tags' : TAGS})
+    popular_tags = Tag.objects.all()
+    return render(request,'ask.html', {'popular_tags' : popular_tags})
 
 
 def login(request):
-    return render(request,'login.html', {'tags' : TAGS})
+    popular_tags = Tag.objects.all()
+    return render(request,'login.html', {'popular_tags' : popular_tags})
 
 
 def signup(request):
-    return render(request,'signup.html', {'tags' : TAGS})
+    popular_tags = Tag.objects.all()
+    return render(request,'signup.html', {'popular_tags' : popular_tags})
 
 
 

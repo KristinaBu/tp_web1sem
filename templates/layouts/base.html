@@ -1,5 +1,5 @@
-{% load static %}
 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 <head>
@@ -9,8 +9,7 @@
 
 
 
-    <link rel="stylesheet" href="{% static 'app_tp/style.css' %}" >
-
+    <link rel="stylesheet"  href="{% static 'app_tp/style.css' %}"/>
 
 
     <body class="d-flex flex-column h-100" _c_t_j1="1"></body>
@@ -45,8 +44,8 @@
                     <div class="col">
                         <h1>Popular tags</h1>
                         <ul class="list-inline">
-                            {% for tag in tags %}
-                            <span class="badge badge-primary bg-success border rounded-pill" href="{% url 'tag' tag_id=tag.id  %}">{{tag.tag_name}}</span>
+                            {% for tag in popular_tags %}
+                            <span class="badge badge-primary bg-success border rounded-pill" href="{% url 'tag' tag_id=tag.id  %}">{{tag.name}}</span>
                             {% endfor %}
                         </ul>
                     </div>

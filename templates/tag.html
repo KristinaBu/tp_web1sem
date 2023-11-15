@@ -1,23 +1,17 @@
 {% extends "layouts/base_reg.html" %}
-
 {% load static %}
-
 {% block content %}
 
-
 <h1 style="background: #003870;color: #9bc2eb;height: 56px;">
-    Tag: {{ tag.tag_name }}
+    Tag: {{ tag.name }}
 </h1>
-
-
-
 
 {% for question in questions %}
 
 <div class="border routn-group btn-group-smnded-0 border-dark shadow" style="margin-bottom: 20px;margin-top: 20px;">
     <div class="row">
         <div class="col-lg-3">
-            <img class="avatar" src="{% static 'app_tp/img/q_ava.png' %}"/>
+            <img   src="{% static 'app_tp/img/ava.png' %}"   style="max-width: 100px;max-height: 80px;margin: 10px;"/>
             <p style="margin: 0px 0px 15px;margin-left: 54px;margin-right: 34px;">5 </p>
             {% include 'components/buttons_like.html' %}
         </div>
@@ -30,11 +24,13 @@
                     <div class="col-lg-2"><a href="#">Link</a><span>(3)</span></div>
                     <div class="col"><span>Tags:</span>
                        <ul class="list-inline" style="transform: translate(0px);">
-                           <li class="list-inline-item">{{tag.tag_name}} </li>
-                            {% for tag in tags %}
-                            <li class="list-inline-item">
-                                <a href="{% url 'tag' tag_id=tag.id  %}">{{tag.tag_name}}</a>
-                            </li>
+                           <li class="list-inline-item">{{tag.name}} </li>
+                            {% for question_tag in question.tags.all %}
+                           {% if question_tag.id != tag.id %}
+                                    <li class="list-inline-item">
+                                       <a href="{% url 'tag' tag_id=question_tag.id  %}">{{question_tag.name}}</a>
+                                    </li>
+                           {% endif %}
                             {% endfor %}
                         </ul>
                     </div>
