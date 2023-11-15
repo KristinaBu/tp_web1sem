@@ -62,8 +62,7 @@ class Question(models.Model):
     objects = QuestionManager()
 
     rating = models.IntegerField(default=0)
-
-    def __str__(self): return f"{self.title} {self.user.username} {self.date} {self.question_rating}"
+    def __str__(self): return f"{self.title} {self.user.username} {self.date} {self.rating}"
 
 
 class Profile(models.Model):
