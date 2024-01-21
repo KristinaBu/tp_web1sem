@@ -67,14 +67,15 @@ class Question(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_login = models.CharField(max_length=100)
-    #nickname = models.CharField(max_length=100)
+
+    # user_login = models.CharField(max_length=100) - вместо него и так есть username
+    nickname = models.CharField(max_length=100)
     # будет разбираться в 5 дз
     # avatar = models.ImageField(blank=True)
     user_rating = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.user.username} {self.user_login}"
+        return f"{self.user.username} {self.nickname}"
 
 
 

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from .models import Profile
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -22,6 +23,12 @@ class RegistrationForm(forms.ModelForm):
         password_repeat = cleaned_data.get('password_repeat')
         email = cleaned_data.get('email')
 
+        # уникальность
+        if User.objects.filter(username=username).exists():
+            raise ValidationError("Пользователь с таким именем уже существует")
+        if User.objects.filter(email=email).exists():
+            raise ValidationError("Пользователь с таким email уже существует")
+        # ошибка ввода
         if username.strip() == '':
             raise ValidationError("Имя пользователя не может состоять только из пробелов")
         if password != password_repeat:
@@ -39,3 +46,12 @@ class RegistrationForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=100)
     password = forms.CharField(widget=forms.PasswordInput)
+
+
+
+
+# class EditProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = Profile
+#         # avatar будет в дз5
+#         fields = ['nickname', 'avatar']

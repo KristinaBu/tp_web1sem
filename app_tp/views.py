@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, RegistrationForm
+from django.contrib.auth.models import User
+
 
 
 def paginate(objects, request, per_page=10):
@@ -88,7 +90,7 @@ def login(request):
     return render(request, 'login.html',
                   {'form': form, 'popular_tags': popular_tags, 'error_message': error_message, 'username': username})
 
-
+@csrf_exempt
 def signup(request):
     popular_tags = Tag.objects.all()
     error_message = ''
@@ -103,13 +105,15 @@ def signup(request):
                 password=form.cleaned_data['password'],
                 email=form.cleaned_data['email']
             )
-            # Добавить никнейм в профиль пользователя
-            user.profile.nickname = form.cleaned_data['nickname']
             user.save()
+            # профиль для нового пользователя
+            profile = Profile(user=user, nickname=form.cleaned_data['nickname'])
+            profile.save()
 
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             auth_login(request, user)
             return redirect('index')
+
     else:
         form = RegistrationForm()
 
@@ -121,3 +125,16 @@ def logout(request):
     auth_logout(request)
     next_page = request.META.get('HTTP_REFERER', 'index')
     return HttpResponseRedirect(next_page)
+
+@login_required
+def edit_profile(request):
+    popular_tags = Tag.objects.all()
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = EditProfileForm(instance=request.user.profile)
+
+    return render(request, 'edit_profile.html', {'popular_tags' : popular_tags, 'form': form})

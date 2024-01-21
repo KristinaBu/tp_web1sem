@@ -2,31 +2,41 @@
 
 {% block content %}
 <h1>Registration</h1>
+
+{% if error_message %}
 <div class="alert alert-warning" role="alert"><span><strong>Sorry, this email adress already registred</strong></span></div>
+{% endif %}
+
+{% if form.non_field_errors %}
+    <div class="alert alert-warning">
+        {{ form.non_field_errors }}
+    </div>
+{% endif %}
+
 <div>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="row">
+        <div class="row" style="margin-bottom: 20px;">
             <div class="col-lg-3"><span style="margin: 10px;">Login</span></div>
             <div class="col">{{ form.username }}</div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-bottom: 20px;">
             <div class="col-lg-3"><span style="margin: 10px;">Email</span></div>
             <div class="col">{{ form.email }}</div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-bottom: 20px;">
             <div class="col-lg-3"><span style="margin: 10px;">NickName</span></div>
             <div class="col">{{ form.nickname }}</div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-bottom: 20px;">
             <div class="col-lg-3"><span style="margin: 10px;">Password</span></div>
             <div class="col">{{ form.password }}</div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-bottom: 20px;">
             <div class="col-lg-3"><span style="margin-left: 10px;">Repeat password</span></div>
             <div class="col">{{ form.password_repeat }}</div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-bottom: 20px;">
             <div class="col"><button class="btn btn-primary" type="submit" style="margin: 0px;margin-bottom: 1px;margin-left: 0px;">Register</button></div>
         </div>
     </form>
