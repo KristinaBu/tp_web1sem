@@ -7,7 +7,7 @@ import math
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.contrib.auth.decorators import login_required
-
+from .forms import LoginForm, RegistrationForm
 
 
 def paginate(objects, request, per_page=10):
@@ -66,50 +66,55 @@ def login(request):
     popular_tags = Tag.objects.all()
     error_message = ''
     username = ''
+    form = LoginForm(request.POST or None)
 
     if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
 
-        user = authenticate(request, username=username, password=password)
+            user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            auth_login(request, user)
-            next_url = request.POST.get('next', 'index')
-            if not next_url:
-                next_url = 'index'
-            return redirect(next_url)
+            if user is not None:
+                auth_login(request, user)
+                next_url = request.POST.get('next', 'index')
+                if not next_url:
+                    next_url = 'index'
+                return redirect(next_url)
 
-        else:
-            error_message = 'Неверный логин или пароль'
+            else:
+                error_message = 'Неверный логин или пароль'
 
     return render(request, 'login.html',
-                  {'popular_tags': popular_tags, 'error_message': error_message, 'username': username})
+                  {'form': form, 'popular_tags': popular_tags, 'error_message': error_message, 'username': username})
 
 
 def signup(request):
     popular_tags = Tag.objects.all()
     error_message = ''
-    if request.method == "POST":
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        password_repeat = request.POST.get('password_repeat')
+    username = ''
+    email = ''
 
-        if User.objects.filter(username=username).exists():
-            error_message = 'Пользователь с таким именем уже существует'
-        elif User.objects.filter(email=email).exists():
-            error_message = 'Этот адрес электронной почты уже зарегистрирован'
-        elif password != password_repeat:
-            error_message = 'Пароли не совпадают'
-        else:
-            user = User.objects.create_user(username=username, email=email, password=password)
-            profile = Profile(user=user, user_login=username)
-            profile.save()
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
+                email=form.cleaned_data['email']
+            )
+            # Добавить никнейм в профиль пользователя
+            user.profile.nickname = form.cleaned_data['nickname']
+            user.save()
+
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             auth_login(request, user)
             return redirect('index')
+    else:
+        form = RegistrationForm()
 
-    return render(request,'signup.html', {'popular_tags' : popular_tags, 'error_message': error_message})
+    return render(request,'signup.html', {'popular_tags' : popular_tags, 'error_message': error_message, 'form': form})
+
 
 
 def logout(request):
