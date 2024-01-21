@@ -75,10 +75,10 @@ def login(request):
 
         if user is not None:
             auth_login(request, user)
-            next_url = request.POST.get('next', 'index')  # Get the next parameter
-            if not next_url:  # If next_url is empty
-                next_url = 'index'  # Set a default URL
-            return redirect(next_url)  # Redirect to the next page or index
+            next_url = request.POST.get('next', 'index')
+            if not next_url:
+                next_url = 'index'
+            return redirect(next_url)
 
         else:
             error_message = 'Неверный логин или пароль'
