@@ -22,3 +22,4 @@ class RegistrationForm(forms.ModelForm):
             raise ValidationError("Пароли не совпадают")
 
         return cleaned_data
+
