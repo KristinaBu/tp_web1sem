@@ -1,20 +1,33 @@
-{% extends "layouts/base_notreg.html" %}
-
+{% extends "layouts/navbar.html" %}
 
 {% block content %}
 <h1>Log In</h1>
-<div class="alert alert-warning" role="alert"><span><strong>Wrong password</strong></span></div>
+{% if error_message %}
+<div class="alert alert-warning" role="alert"><span><strong>{{ error_message }}</strong></span></div>
+{% endif %}
 <div>
-    <div class="row">
-        <div class="col-lg-3"><span style="margin: 10px;">Login</span></div>
-        <div class="col"><input type="text" style="margin: 10px 0px 10px;margin-bottom: 9px;width: 400px;" minlength="1" maxlength="200" placeholder="Enter your login..." /></div>
-    </div>
-    <div class="row">
-        <div class="col-lg-3"><span style="margin: 10px;">Password</span></div>
-        <div class="col"><input type="password" style="width: 400px;margin: 10px 0px 10px;" /></div>
-    </div>
-    <div class="row">
-        <div class="col"><button class="btn btn-primary" type="button" style="margin: 0px;margin-bottom: 1px;margin-left: 0px;">Log in</button><a href="{% url 'signup' %}" style="margin: 0px 0px 0px 20px;">Create new bubcount</a></div>
-    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
+        <div class="row">
+            <div class="col-lg-3"><span style="margin: 10px;">Login</span></div>
+            <div class="col">
+                <input type="text" name="username" value="{{ username }}" style="margin: 10px 0px 10px;margin-bottom: 9px;width: 400px;" minlength="1" maxlength="200" placeholder="Enter your login..." />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"><span style="margin: 10px;">Password</span></div>
+            <div class="col">
+                <input type="password" name="password" style="width: 400px;margin: 10px 0px 10px;" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col"><button class="btn btn-primary" type="submit" style="margin: 0px;margin-bottom: 1px;margin-left: 0px;">Log in</button>
+                <a href="{% url 'signup' %}" style="margin: 0px 0px 0px 20px;">Create new bubcount</a>
+            </div>
+        </div>
+    </form>
 </div>
 {% endblock %}
+
+

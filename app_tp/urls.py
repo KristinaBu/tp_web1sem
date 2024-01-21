@@ -6,3 +6,4 @@ urlpatterns = [
     path('question', views.question),
     path('tag', views.tag),
 ]
+

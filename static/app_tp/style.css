@@ -12,3 +12,7 @@ body {
     max-height: 80px;
     margin: 10px;
 }
+
+.breadcrumb_heading{
+    background: rgb(0,56,112);
+}

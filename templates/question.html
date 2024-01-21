@@ -1,4 +1,4 @@
-{% extends "layouts/base_notreg.html" %}
+{% extends "layouts/navbar.html" %}
 
 {% load static %}
 
@@ -7,7 +7,7 @@
 <div class="border-dark" style="margin-top: 20px;height: 250px;padding-bottom: 2px;margin-bottom: 20px;border-bottom-style: solid;">
     <div class="row">
         <div class="col-lg-3" style="height: 250px;">
-            <img   src="{% static 'app_tp/img/ava.png' %}"   style="max-width: 100px;max-height: 80px;margin: 10px;"/>
+            <img class="avatar" src="{% static 'app_tp/img/ava.png' %}"/>
             <p style="margin: 0px 0px 15px;width: 41px;margin-left: 45px;">5</p>
             {% include 'components/buttons_like.html' %}
         </div>
@@ -37,8 +37,8 @@
 <div class="border rounded-0 border-dark shadow" style="margin-bottom: 20px;margin-top: 20px;">
     <div class="row">
         <div class="col-lg-3">
-            <img   src="{% static 'app_tp/img/ava.png' %}"   style="max-width: 100px;max-height: 80px;margin: 10px;"/>
-            <p style="margin: 0px 0px 15px 45px;">5</p>
+            <img class="avatar" src="{% static 'app_tp/img/ava.png' %}"/>
+                <p style="margin: 0px 0px 15px 45px;">5</p>
             {% include 'components/buttons_like.html' %}
         </div>
         <div class="col" style="word-wrap: break-word;">
