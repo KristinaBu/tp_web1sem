@@ -56,7 +56,7 @@ def tag(request, tag_id):
 def question(request, question_id):
     question_item = Question.objects.get(id=question_id)
     popular_tags = Tag.objects.all()
-    per_page = 10
+    per_page = 5
 
     if request.method == 'POST':
         form = AnswerForm(request.POST)

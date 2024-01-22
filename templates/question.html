@@ -62,36 +62,8 @@
 {% endfor %}
 
 
-<nav>
-    <ul class="pagination">
-        {% if answers.has_previous %}
-        <li class="page-item">
-            <a class="page-link"  href="?page=1">
-                First
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" aria-label="Previous" href="?page={{ answers.previous_page_number }}">
-            <span aria-hidden="true">«</span>
-            </a>
-        </li>
-        {% endif %}
-        <li class="page-item">
-            <a class="page-link" href="#">Page {{answers.number}} of {{answers.paginator.num_pages}}</a>
-        </li>
-        {% if answers.has_next %}
-        <li class="page-item">
-            <a class="page-link" aria-label="Next" href="?page={{ answers.next_page_number }}">
-                <span aria-hidden="true">»</span>
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="?page={{ answers.paginator.num_pages }}">Last {{answers.paginator.num_pages}}
-            </a>
-        </li>
-        {% endif %}
-    </ul>
-</nav>
+{% include 'components/pagination.html' with page_obj=answers %}
+
 
 <div class="border rounded-0 border-dark" style="margin: 10px 0px 10px 0px;margin-bottom: 10px;margin-top: 11px;border-width: 7.571429px;border-style: solid;background: #000000;"></div>
 <div>
