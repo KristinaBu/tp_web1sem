@@ -15,12 +15,12 @@
     <div class="row">
         <div class="col-lg-3">
             <img class="avatar" src="{% static 'app_tp/img/q_ava.png' %}"/>
-            <p style="margin: 0px 0px 15px;margin-left: 54px;margin-right: 34px;">5</p>
+            <p style="margin: 0px 0px 15px;margin-left: 54px;margin-right: 34px;"> {{ question.rating }} </p>
             {% include 'components/buttons_like.html' %}
         </div>
         <div class="col">
-            <div><a href="{% url 'question' question_id=question.id %}" style="font-size: 35px;"> {{ question.title }} </a>
-                <p>{{ question.text }}</p>
+            <div><a href="{% url 'question' question_id=question.id %}" style="font-size: 30px; word-wrap: break-word; word-break: break-all; " > {{ question.title|truncatechars:50 }} </a>
+                <p>{{ question.text|truncatechars:50 }}</p>
             </div>
             <div>
                 <div class="row">

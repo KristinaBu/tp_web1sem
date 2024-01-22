@@ -7,8 +7,11 @@ import math
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm, RegistrationForm
+from .forms import LoginForm, RegistrationForm, EditProfileForm, QuestionForm, AnswerForm
+
 from django.contrib.auth.models import User
+from django.urls import reverse
+
 
 
 
@@ -36,7 +39,7 @@ def hot(request):
     hot_questions = Question.objects.get_questions_ordered_by_rating()
     popular_tags = Tag.objects.all()
     return render(request,'index.html',
-                  {'questions' : paginate(hot_questions, request, 2),
+                  {'questions' : paginate(hot_questions, request, 5),
                                                 'popular_tags' : popular_tags})
 
 def tag(request, tag_id):
@@ -48,19 +51,56 @@ def tag(request, tag_id):
 
 
 
+@csrf_exempt
+@login_required
 def question(request, question_id):
-    #questions = Question.objects.get_questions_ordered_by_date()
-    #question_item = questions[question_id]
-    popular_tags = Tag.objects.all()
     question_item = Question.objects.get(id=question_id)
-    return render(request,'question.html', {'question' : question_item, 'popular_tags' : popular_tags,
-                                            'answers' : paginate(Answer.objects.get_answers_by_question(question_item.id), request, 5)})
+    popular_tags = Tag.objects.all()
+    per_page = 10
+
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save(commit=False)
+            answer.question = question_item
+            answer.user = request.user
+            answer.save()
+            # махинации с пагинацией - последняя страница = страница ответа
+            last_page = answer.question.answers.count() // per_page + 1  # замените 5 на количество ответов на странице
+            return HttpResponseRedirect(
+                reverse('question', args=(question_id,)) + '?page=%s#answer-%s' % (last_page, answer.id))
+    else:
+        form = AnswerForm()
+
+    return render(request, 'question.html', {
+        'question': question_item,
+        'popular_tags': popular_tags,
+        'answers': paginate(Answer.objects.get_answers_by_question(question_item.id), request, per_page),
+        'form': form,
+    })
 
 
+
+@csrf_exempt
 @login_required
 def ask(request):
     popular_tags = Tag.objects.all()
-    return render(request,'ask.html', {'popular_tags' : popular_tags})
+
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            # сохраняет данные формы в объект question, но еще не сохраняет его в БД
+            question = form.save(commit=False)
+            # устанавливает юзера, который отправил запрос, в качестве юзера для вопроса
+            question.user = request.user
+            question.save()
+            # сохраняет связи многие-ко-многим для формы
+            form.save_m2m()
+            return redirect('question', question_id=question.id)
+    else:
+        form = QuestionForm()
+
+    return render(request,'ask.html', {'form': form, 'popular_tags' : popular_tags})
 
 
 @csrf_exempt
@@ -93,7 +133,6 @@ def login(request):
 @csrf_exempt
 def signup(request):
     popular_tags = Tag.objects.all()
-    error_message = ''
     username = ''
     email = ''
 
@@ -117,7 +156,7 @@ def signup(request):
     else:
         form = RegistrationForm()
 
-    return render(request,'signup.html', {'popular_tags' : popular_tags, 'error_message': error_message, 'form': form})
+    return render(request,'signup.html', {'popular_tags' : popular_tags, 'form': form})
 
 
 
@@ -126,15 +165,20 @@ def logout(request):
     next_page = request.META.get('HTTP_REFERER', 'index')
     return HttpResponseRedirect(next_page)
 
+@csrf_exempt
 @login_required
 def edit_profile(request):
     popular_tags = Tag.objects.all()
+
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user.profile)
+        form = EditProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+            request.user.email = form.cleaned_data['email']
+            request.user.save()
+            return redirect('edit_profile')
     else:
         form = EditProfileForm(instance=request.user.profile)
+        form.fields['email'].initial = request.user.email
 
-    return render(request, 'edit_profile.html', {'popular_tags' : popular_tags, 'form': form})
+    return render(request, 'profile.html', {'popular_tags' : popular_tags, 'form': form})

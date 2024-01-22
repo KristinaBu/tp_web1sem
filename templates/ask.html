@@ -2,20 +2,29 @@
 {% block content %}
 
 <h1>New BubQuestion</h1>
-<div class="alert alert-warning" role="alert"><span><strong>Add text</strong></span></div>
+
+{% if form.non_field_errors %}
+    <div class="alert alert-warning">
+        {{ form.non_field_errors }}
+    </div>
+{% endif %}
 <div>
-    <div class="row">
-        <div class="col-lg-3"><span style="margin: 10px;">Title</span></div>
-        <div class="col"><input type="text" style="margin: 10px 0px 10px;margin-bottom: 9px;width: 400px;" minlength="10" maxlength="200" /></div>
-    </div>
-    <div class="row">
-        <div class="col-lg-3"><span style="margin: 10px;">Text</span></div>
-        <div class="col"><textarea style="width: 400px;margin: 10px 0px 10px;" minlength="20" maxlength="500"></textarea></div>
-    </div>
-    <div class="row">
-        <div class="col-lg-3"><span style="margin: 10px;">Tags</span></div>
-        <div class="col"><textarea style="width: 400px;margin: 10px 0px 10px;" minlength="1" maxlength="200"></textarea></div>
-    </div><button class="btn btn-primary" type="button" style="margin: 0px 0px 19px;margin-bottom: 1px;margin-left: 0px;">Ask!</button>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-lg-3"><span style="margin: 10px;">Title</span></div>
+            <div class="col">{{ form.title }}</div>
+        </div>
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-lg-3"><span style="margin: 10px;">Text</span></div>
+            <div class="col">{{ form.text }}</div>
+        </div>
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-lg-3"><span style="margin: 10px;">Tags</span></div>
+            <div class="col">{{ form.tags }}</div>
+        </div>
+        <button class="btn btn-primary" type="submit" style="margin: 0px 0px 19px;margin-bottom: 1px;margin-left: 0px;">Ask!</button>
+    </form>
 </div>
 
 {% endblock %}

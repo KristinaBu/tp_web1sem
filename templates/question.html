@@ -2,30 +2,26 @@
 
 {% load static %}
 
-
- {% block content %}
-<div class="border-dark" style="margin-top: 20px;height: 250px;padding-bottom: 2px;margin-bottom: 20px;border-bottom-style: solid;">
+{% block content %}
+<div class="border-dark" style="margin-top: 20px;padding-bottom: 2px;margin-bottom: 20px;border-bottom-style: solid;">
     <div class="row">
-        <div class="col-lg-3" style="height: 250px;">
+        <div class="col-lg-3">
             <img class="avatar" src="{% static 'app_tp/img/ava.png' %}"/>
-            <p style="margin: 0px 0px 15px;width: 41px;margin-left: 45px;">5</p>
+            <p style="margin: 10px 0px 15px;width: 41px;margin-left: 45px;">{{ question.rating }} </p>
             {% include 'components/buttons_like.html' %}
         </div>
         <div class="col" style="word-wrap: break-word;">
-            <div style="height: 180px;">
-                <h1 style="height: 50px;">{{question.title}} - How to find Bublik?</h1>
-                <p style="height: 100px;">{{ question.text }}</p>
+            <div>
+                <h1 style="font-size: 20px; word-wrap: break-word; word-break: break-all;">{{question.title}}</h1>
+                <p style="word-wrap: break-word; word-break: break-all;">{{ question.text }} </p>
             </div>
             <div>
-                <div class="row">
-                    <div class="col" style="height: 65px;"><span>Tags:</span>
-                            {% for tag in question.tags.all %}
-                            <li class="list-inline-item">
-                                <a href="{% url 'tag' tag_id=tag.id  %}">{{tag.name}}</a>
-                            </li>
-                            {% endfor %}
-                    </div>
-                </div>
+                <span>Tags:</span>
+                {% for tag in question.tags.all %}
+                <li class="list-inline-item">
+                    <a href="{% url 'tag' tag_id=tag.id  %}">{{tag.name}}</a>
+                </li>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -34,11 +30,14 @@
 
 {% for answer in answers %}
 
+<div id="answer-{{ answer.id }}">
+
+
 <div class="border rounded-0 border-dark shadow" style="margin-bottom: 20px;margin-top: 20px;">
     <div class="row">
         <div class="col-lg-3">
             <img class="avatar" src="{% static 'app_tp/img/ava.png' %}"/>
-                <p style="margin: 0px 0px 15px 45px;">5</p>
+                <p style="margin: 0px 0px 15px 45px;">{{ answer.rating }} </p>
             {% include 'components/buttons_like.html' %}
         </div>
         <div class="col" style="word-wrap: break-word;">
@@ -57,7 +56,11 @@
     </div>
 </div>
 
+</div>
+
+
 {% endfor %}
+
 
 <nav>
     <ul class="pagination">
@@ -92,16 +95,25 @@
 
 <div class="border rounded-0 border-dark" style="margin: 10px 0px 10px 0px;margin-bottom: 10px;margin-top: 11px;border-width: 7.571429px;border-style: solid;background: #000000;"></div>
 <div>
-    <div class="row">
-        <div class="col"><textarea style="width: 600px; margin-top: 10px" minlength="1" maxlength="300" title="Enter your answer here..." placeholder="Enter your answer here..."></textarea></div>
-    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col">
+                {{ form.text }}
+                {% if form.text.errors %}
+                    <div class="alert alert-warning">
+                        {{ form.text.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
 
-    <div class="row">
-        <div class="col"><button class="btn btn-primary" type="button">Bub to answer!</button></div>
-    </div>
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col"><button class="btn btn-primary" type="submit">Bub to answer!</button></div>
+        </div>
+    </form>
 </div>
 
 {% endblock %}
-
 
 
