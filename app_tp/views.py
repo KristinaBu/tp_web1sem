@@ -66,7 +66,7 @@ def question(request, question_id):
             answer.user = request.user
             answer.save()
             # махинации с пагинацией - последняя страница = страница ответа
-            last_page = answer.question.answers.count() // per_page + 1  # замените 5 на количество ответов на странице
+            last_page = answer.question.answers.count() // per_page + 1
             return HttpResponseRedirect(
                 reverse('question', args=(question_id,)) + '?page=%s#answer-%s' % (last_page, answer.id))
     else:
